@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightbox</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+        }
+        .grid{
+            display: grid;
+            grid-template-columns: repeat(3,200px);
+            justify-content: center;
+            align-items: center;
+            grid-gap: 10px;
+            height: 100vh;
+        }
+        .grid img{
+            width: 200px;
+            height: 200px;
+        }
+        #lightbox{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: rgba(0, 0, 0, .8);
+            z-index: 1000;
+            display: none;
+        }
+        #lightbox.active{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <img src="https://images.unsplash.com/photo-1645391231397-0b63df0aee1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDR8aVVJc25WdGpCMFl8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" alt="">
+        <img src="https://images.unsplash.com/photo-1645459096145-d0a43fcf6e85?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDZ8aVVJc25WdGpCMFl8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"  alt="">
+        <img src="https://images.unsplash.com/photo-1602272312497-76be590ee2bf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDQ4fGlVSXNuVnRqQjBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"  alt="">
+        <img src="https://images.unsplash.com/photo-1645518005679-50c3b9e15cc0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDEwfGlVSXNuVnRqQjBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="">
+        <img src="https://images.unsplash.com/photo-1645141457783-a7fefc9ac96c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDMyfGlVSXNuVnRqQjBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"alt="">
+        <img src="https://images.unsplash.com/photo-1645391231397-0b63df0aee1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDR8aVVJc25WdGpCMFl8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"alt="">
+        <img src="https://images.unsplash.com/photo-1644945428609-0e7f21cd2a3d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDY5fGlVSXNuVnRqQjBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="">
+        <img src="https://images.unsplash.com/photo-1592608635356-cff02ce90916?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDY1fGlVSXNuVnRqQjBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="">
+        <img src="https://images.unsplash.com/photo-1645207213625-aa6367cbab66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDUzfGlVSXNuVnRqQjBZfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            alt="">
+    </div>
+
+    <script>
+        const lightbox = document.createElement('div');
+        lightbox.id = 'lightbox';
+        document.body.appendChild(lightbox);
+
+        const images = document.querySelectorAll('img');
+        images.forEach( image => {
+            image.addEventListener('click', e => {
+                lightbox.classList.add('active');
+                const img = document.createElement('img');
+                img.src = image.src
+                while(lightbox.firstChild){
+                    lightbox.removeChild(lightbox.firstChild);
+                }
+                lightbox.appendChild(img);
+            })
+        })
+
+        lightbox.addEventListener('click', e => {
+            if(e.target !== e.currentTarget) return
+            lightbox.classList.remove('active');
+        })
+    </script>
+</body>
+</html>
